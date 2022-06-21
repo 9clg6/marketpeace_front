@@ -2,7 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
-import 'package:get/get_navigation/src/root/get_material_app.dart';
+import 'package:market_peace/constants.dart';
 import 'package:market_peace/guard/auth_guard.dart';
 import 'package:market_peace/routing/app_router.gr.dart';
 
@@ -35,6 +35,14 @@ class MyApp extends StatelessWidget {
       onInit: (){
         Get.put(const FlutterSecureStorage());
       },
+      theme: buildThemeData(),
+    );
+  }
+
+  buildThemeData() {
+    final ThemeData base = ThemeData();
+    return base.copyWith(
+      hintColor: darkAccentuation,
     );
   }
 }

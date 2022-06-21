@@ -35,6 +35,11 @@
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
 	<key>UISupportedInterfaceOrientations~ipad</key>
+
+	<key>NSPhotoLibraryUsageDescription<key>
+	<key>NSCameraUsageDescription<key>
+	<key>NSMicrophoneUsageDescription<key>
+
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
 		<string>UIInterfaceOrientationPortraitUpsideDown</string>

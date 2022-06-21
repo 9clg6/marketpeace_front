@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:custom_navigation_bar/custom_navigation_bar.dart';
 import 'package:flutter/material.dart';
@@ -213,51 +214,56 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  Padding buildCreateAdBtn() {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 25.0),
-      child: Container(
-        margin: const EdgeInsetsDirectional.only(start: 5, end: 5),
-        decoration: BoxDecoration(
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black.withOpacity(0.2),
-              offset: const Offset(3, 3),
-            )
-          ],
-          color: distinctiveColor,
-          borderRadius: BorderRadius.circular(25),
-        ),
-        height: 100,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: const [
-                Text(
-                  "créer une",
-                  style: TextStyle(
-                    color: white,
-                    fontSize: 15,
-                    letterSpacing: 2,
-                    fontWeight: FontWeight.bold,
+  buildCreateAdBtn() {
+    return InkWell(
+      onTap: () {
+        context.router.pushNamed('/create-ad-page');
+      },
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 25.0),
+        child: Container(
+          margin: const EdgeInsetsDirectional.only(start: 5, end: 5),
+          decoration: BoxDecoration(
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withOpacity(0.2),
+                offset: const Offset(3, 3),
+              )
+            ],
+            color: distinctiveColor,
+            borderRadius: BorderRadius.circular(25),
+          ),
+          height: 100,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: const [
+                  Text(
+                    "créer une",
+                    style: TextStyle(
+                      color: white,
+                      fontSize: 15,
+                      letterSpacing: 2,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
-                ),
-                Text(
-                  "Nouvelle annonce",
-                  style: TextStyle(
-                    color: white,
-                    fontSize: 25,
-                    letterSpacing: 5,
-                    fontWeight: FontWeight.w900,
+                  Text(
+                    "Nouvelle annonce",
+                    style: TextStyle(
+                      color: white,
+                      fontSize: 25,
+                      letterSpacing: 5,
+                      fontWeight: FontWeight.w900,
+                    ),
                   ),
-                ),
-              ],
-            ),
-          ],
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );
