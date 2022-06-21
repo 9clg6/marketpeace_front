@@ -3,6 +3,9 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:custom_navigation_bar/custom_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:market_peace/constants.dart';
+import 'package:market_peace/data/ad_manager.dart';
+import 'package:market_peace/model/advertisement.dart';
+import 'package:market_peace/widgets/ad_card.dart';
 import 'package:market_peace/widgets/custom_search_bar.dart';
 
 class HomePage extends StatefulWidget {
@@ -13,6 +16,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  List<Advertisement> adsList = [];
   int _currentIndex = 0;
 
   @override
@@ -96,29 +100,41 @@ class _HomePageState extends State<HomePage> {
   }
 
   buildBody() {
-    return NestedScrollView(
-      headerSliverBuilder: (context, innerBoxIsScrolled) {
-        return [
-          buildAppTitle(),
-          const CustomSearchBar(),
-        ];
-      },
-      body: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 10.0),
-        child: SingleChildScrollView(
-          child: Column(
-            mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              buildCreateAdBtn(),
-              buildCarousel(),
-              buildFavoriteColumn(),
-            ],
-          ),
-        ),
-      ),
-    );
+    return FutureBuilder(
+        future: AdManager.getAds(),
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            adsList = snapshot.data as List<Advertisement>;
+
+            return NestedScrollView(
+              headerSliverBuilder: (context, innerBoxIsScrolled) {
+                return [
+                  buildAppTitle(),
+                  const CustomSearchBar(),
+                ];
+              },
+              body: Padding(
+                padding: const EdgeInsets.symmetric(vertical: 10.0),
+                child: SingleChildScrollView(
+                  child: Column(
+                    mainAxisSize: MainAxisSize.max,
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      buildCreateAdBtn(),
+                      buildCarousel(),
+                      buildFavoriteColumn(),
+                    ],
+                  ),
+                ),
+              ),
+            );
+          } else {
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          }
+        });
   }
 
   buildFavoriteColumn() {
@@ -178,14 +194,9 @@ class _HomePageState extends State<HomePage> {
         disableCenter: true,
       ),
       items: [
-        ...List.generate(30, (index) {
-          return Container(
-            width: 270,
-            height: 250,
-            decoration: BoxDecoration(
-              color: beige,
-              borderRadius: BorderRadius.circular(25),
-            ),
+        ...List.generate(adsList.length, (index) {
+          return AdCard(
+            ad: adsList.elementAt(index),
           );
         })
       ],

@@ -73,9 +73,7 @@ class _CreateAdPageState extends State<CreateAdPage> {
     );
   }
 
-  buildBottomMarge() {
-    return const SizedBox(height: 100);
-  }
+  buildBottomMarge() => const SizedBox(height: 100);
 
   buildStepProgressIndicator() {
     return SizedBox(
