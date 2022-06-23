@@ -1,16 +1,16 @@
 import 'dart:convert';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:market_peace/constants.dart';
 import 'package:market_peace/exception/advertisement_exception.dart';
 import 'package:market_peace/model/advertisement.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class AdManager {
 
   static Future<List<Advertisement>> getAds() async {
-    FlutterSecureStorage secureStorage = Get.find();
-    final token = await secureStorage.read(key: 'bearerToken');
+    final prefs = await SharedPreferences.getInstance();
+    final token = prefs.getString('bearerToken');
     List<Advertisement> adsList = [];
 
     final response = await http.get(
@@ -43,9 +43,9 @@ class AdManager {
     required String description,
     required String imageUrl,
   }) async {
-    FlutterSecureStorage secureStorage = Get.find();
-    final userId = await secureStorage.read(key: 'userId');
-    final token = await secureStorage.read(key: 'bearerToken');
+    final prefs = await SharedPreferences.getInstance();
+    final userId = prefs.getString('userId');
+    final token = prefs.getString('bearerToken');
 
     final response = await http.post(
       Uri.parse("$apiAddress/api/advertisements/"),

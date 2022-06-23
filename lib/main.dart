@@ -1,6 +1,5 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
 import 'package:market_peace/constants.dart';
 import 'package:market_peace/guard/auth_guard.dart';
@@ -32,9 +31,6 @@ class MyApp extends StatelessWidget {
       routerDelegate: _appRouter.delegate(),
       routeInformationParser: _appRouter.defaultRouteParser(),
       popGesture: false,
-      onInit: (){
-        Get.put(const FlutterSecureStorage());
-      },
       theme: buildThemeData(),
     );
   }

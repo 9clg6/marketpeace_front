@@ -1,18 +1,17 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthGuard extends AutoRouteGuard {
   @override
-  void onNavigation(NavigationResolver resolver, StackRouter router) {
-    FlutterSecureStorage secureStorage = Get.find();
+  void onNavigation(NavigationResolver resolver, StackRouter router) async {
+    final prefs = await SharedPreferences.getInstance();
 
-    secureStorage.read(key: 'bearerToken').then((value){
-      if(value == null){
-        router.pushNamed('/login-page');
-      } else {
-        resolver.next();
-      }
-    });
+    final result = prefs.get('bearerToken');
+
+    if(result == null){
+      router.pushNamed('/login-page');
+    } else {
+      resolver.next();
+    }
   }
 }

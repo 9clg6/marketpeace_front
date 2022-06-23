@@ -101,40 +101,47 @@ class _HomePageState extends State<HomePage> {
 
   buildBody() {
     return FutureBuilder(
-        future: AdManager.getAds(),
-        builder: (context, snapshot) {
-          if (snapshot.hasData) {
-            adsList = snapshot.data as List<Advertisement>;
+      future: AdManager.getAds(),
+      builder: (context, snapshot) {
+        if (snapshot.data == null && !snapshot.hasData) {
+          adsList = List.generate(10, (index) {
+            return Advertisement(
+                title: "Test $index",
+                id: index,
+                description: "Description test",
+                imageUrl: "https://firebasestorage.googleapis.com/v0/b/marketpeace-ee123.appspot.com/o/2022-06-21%2012%3A35%3A32.866536_6.jpg?alt=media&token=be2344bf-df64-4acd-a7bf-829d8d0aff98",
+                ownerId: index,
+                price: double.parse(index.toString()));
+          });
+        } else {
+          adsList = snapshot.data as List<Advertisement>;
+        }
 
-            return NestedScrollView(
-              headerSliverBuilder: (context, innerBoxIsScrolled) {
-                return [
-                  buildAppTitle(),
-                  const CustomSearchBar(),
-                ];
-              },
-              body: Padding(
-                padding: const EdgeInsets.symmetric(vertical: 10.0),
-                child: SingleChildScrollView(
-                  child: Column(
-                    mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      buildCreateAdBtn(),
-                      buildCarousel(),
-                      buildFavoriteColumn(),
-                    ],
-                  ),
-                ),
+        return NestedScrollView(
+          headerSliverBuilder: (context, innerBoxIsScrolled) {
+            return [
+              buildAppTitle(),
+              const CustomSearchBar(),
+            ];
+          },
+          body: Padding(
+            padding: const EdgeInsets.symmetric(vertical: 10.0),
+            child: SingleChildScrollView(
+              child: Column(
+                mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  buildCreateAdBtn(),
+                  buildCarousel(),
+                  buildFavoriteColumn(),
+                ],
               ),
-            );
-          } else {
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
-          }
-        });
+            ),
+          ),
+        );
+      },
+    );
   }
 
   buildFavoriteColumn() {
