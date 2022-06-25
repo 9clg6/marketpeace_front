@@ -5,4 +5,4 @@ const lightAccentuation = Color.fromARGB(255, 225, 181, 127);
 const distinctiveColor = Color.fromARGB(255, 218, 77, 82);
 const darkAccentuation = Color.fromARGB(255, 33, 42, 64);
 const white = Colors.white;
-const apiAddress = 'http://172.20.10.3:8080';
+const apiAddress = 'http://192.168.0.34:8080';

@@ -103,13 +103,13 @@ class _HomePageState extends State<HomePage> {
     return FutureBuilder(
       future: AdManager.getAds(),
       builder: (context, snapshot) {
-        if (snapshot.data == null && !snapshot.hasData) {
+        if (snapshot.data == null || !snapshot.hasData || (snapshot.data as List).isEmpty) {
           adsList = List.generate(10, (index) {
             return Advertisement(
                 title: "Test $index",
                 id: index,
                 description: "Description test",
-                imageUrl: "https://firebasestorage.googleapis.com/v0/b/marketpeace-ee123.appspot.com/o/2022-06-21%2012%3A35%3A32.866536_6.jpg?alt=media&token=be2344bf-df64-4acd-a7bf-829d8d0aff98",
+                imageUrl: null,
                 ownerId: index,
                 price: double.parse(index.toString()));
           });
@@ -154,7 +154,7 @@ class _HomePageState extends State<HomePage> {
           Row(
             children: const [
               Text(
-                "Annonces favorites ❤️",
+                "Plus d'annonces",
                 style: TextStyle(
                   color: distinctiveColor,
                   fontWeight: FontWeight.bold,

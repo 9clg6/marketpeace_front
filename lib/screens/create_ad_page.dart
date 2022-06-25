@@ -102,37 +102,36 @@ class _CreateAdPageState extends State<CreateAdPage> {
             _titleFormKey.currentState!.validate();
           } else if (!isDescriptionValid) {
             _descFormKey.currentState!.validate();
-          } else if(!isPriceValid) {
+          } else if (!isPriceValid) {
             _priceFormKey.currentState!.validate();
           } else if (isPhotoValid) {
-            try {
-              AdManager.saveAd(
-                title: titleController.text,
-                price: double.parse(priceController.text),
-                description: descriptionController.text,
-                imageUrl: downloadUrl ?? "",
-              ).then((value) => context.router.pushNamed('/')).whenComplete(() {
-                showDialog(
-                  context: context,
-                  builder: (context) {
-                    return AlertDialog(
-                      title: const Text("Annonce créée !"),
-                      content: const Text("Votre annonce a bien été créée !"),
-                      actions: [
-                        TextButton(
-                          onPressed: () => context.router.pop(),
-                          child: const Text("Super !"),
-                        )
-                      ],
-                    );
-                  },
-                );
-              });
-            } on AdvertisementException catch (e){
-              context.router.pushNamed('/login-page');
-              Get.snackbar("Veuillez vous reconnecter", "Votre session a expiré, merci de vous reconnecter");
+            AdManager.saveAd(
+              title: titleController.text,
+              price: double.parse(priceController.text),
+              description: descriptionController.text,
+              imageUrl: downloadUrl ?? "",
+            ).then((value) {
+              context.router.replaceNamed('/');
+              showDialog(
+                context: context,
+                builder: (context) {
+                  return AlertDialog(
+                    title: const Text("Annonce créée !"),
+                    content: const Text("Votre annonce a bien été créée !"),
+                    actions: [
+                      TextButton(
+                        onPressed: () => context.router.pop(),
+                        child: const Text("Super !"),
+                      )
+                    ],
+                  );
+                },
+              );
+            }).catchError((e){
               SecuredStoreManager.clearSecuredStore();
-            }
+              context.router.replaceNamed('/login-page');
+              Get.snackbar("Veuillez vous reconnecter", "Votre session a expiré, merci de vous reconnecter");
+            });
           }
         },
         child: Container(
@@ -157,7 +156,7 @@ class _CreateAdPageState extends State<CreateAdPage> {
                 borderRadius: BorderRadius.circular(25),
               ),
               child: Text(
-                isTitleValid && isDescriptionValid && isPriceValid && isPhotoValid? "Terminer" : "Continuer",
+                isTitleValid && isDescriptionValid && isPriceValid && isPhotoValid ? "Terminer" : "Continuer",
                 style: const TextStyle(
                   color: Colors.white,
                   fontSize: 15,
