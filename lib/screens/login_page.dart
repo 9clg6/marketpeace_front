@@ -258,10 +258,9 @@ class LoginPage extends StatelessWidget {
     TextEditingController passwordController,
     BuildContext context,
   ) async {
-    try {
-      final signInResult = await AuthManager.signIn(username: mailController.text, password: passwordController.text);
+    AuthManager.signIn(username: mailController.text, password: passwordController.text).then((signInResult) {
       if(signInResult) context.router.replaceNamed('/');
-    } on AuthenticationException catch (e) {
+    }).catchError((e){
       showDialog(
         context: context,
         builder: (context) {
@@ -277,6 +276,6 @@ class LoginPage extends StatelessWidget {
           );
         },
       );
-    }
+    });
   }
 }

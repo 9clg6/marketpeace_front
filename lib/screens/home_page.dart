@@ -101,7 +101,7 @@ class _HomePageState extends State<HomePage> {
 
   buildBody() {
     return FutureBuilder(
-      future: AdManager.getAds(),
+      future: AdManager.getAds(false),
       builder: (context, snapshot) {
         if (snapshot.data == null || !snapshot.hasData || (snapshot.data as List).isEmpty) {
           adsList = List.generate(10, (index) {
@@ -169,7 +169,7 @@ class _HomePageState extends State<HomePage> {
           SizedBox(
             height: 800,
             child: ListView.builder(
-              itemCount: 4,
+              itemCount: adsList.length,
               physics: const NeverScrollableScrollPhysics(),
               itemBuilder: (context, index) {
                 return Padding(
@@ -179,8 +179,9 @@ class _HomePageState extends State<HomePage> {
                       color: beige,
                       borderRadius: BorderRadius.circular(25),
                     ),
-                    height: 150,
-                    width: 250,
+                    child: AdCard(
+                      ad: adsList.elementAt(index),
+                    ),
                   ),
                 );
               },
@@ -201,7 +202,7 @@ class _HomePageState extends State<HomePage> {
         disableCenter: true,
       ),
       items: [
-        ...List.generate(adsList.length, (index) {
+        ...List.generate(3, (index) {
           return AdCard(
             ad: adsList.elementAt(index),
           );

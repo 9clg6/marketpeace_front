@@ -9,7 +9,7 @@ class SecuredStoreManager {
 
   static Future<void> storeInformations(SignInResponse signInResponse) async {
     final prefs = await SharedPreferences.getInstance();
-    print(signInResponse.token);
+
     prefs.setString(
       'bearerToken',
       signInResponse.token!,
