@@ -22,7 +22,7 @@ class _AdCardState extends State<AdCard> {
       'assets/default-placeholder.png',
     );
 
-    if( widget.ad.imageUrl != null){
+    if(widget.ad.imageUrl != null){
       img = Image.network(widget.ad.imageUrl!);
       img.image.resolve(const ImageConfiguration()).addListener(
         ImageStreamListener((image, synchronousCall) {

@@ -166,27 +166,25 @@ class _HomePageState extends State<HomePage> {
           const SizedBox(
             height: 20,
           ),
-          SizedBox(
-            height: 800,
-            child: ListView.builder(
-              itemCount: adsList.length,
-              physics: const NeverScrollableScrollPhysics(),
-              itemBuilder: (context, index) {
-                return Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 5.0),
-                  child: Container(
-                    decoration: BoxDecoration(
-                      color: beige,
-                      borderRadius: BorderRadius.circular(25),
-                    ),
-                    child: AdCard(
-                      ad: adsList.elementAt(index),
-                    ),
+          ListView.builder(
+            shrinkWrap: true,
+            itemCount: adsList.length,
+            physics: const NeverScrollableScrollPhysics(),
+            itemBuilder: (context, index) {
+              return Padding(
+                padding: const EdgeInsets.symmetric(vertical: 5.0),
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: beige,
+                    borderRadius: BorderRadius.circular(25),
                   ),
-                );
-              },
-            ),
-          )
+                  child: AdCard(
+                    ad: adsList.elementAt(index),
+                  ),
+                ),
+              );
+            },
+          ),
         ],
       ),
     );
