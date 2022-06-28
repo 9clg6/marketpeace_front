@@ -1,8 +1,13 @@
 # MarketPeace App
+
 **Créateur**: Clément GUYON
+
 **Ecole**: Ynov Lyon Campus
+
 **Formation**: Mastère Développement Logiciel, Mobile & IoT
+
 **Module**: Web Service
+
 **Groupe**: Travail réalisé **SEUL**.
 
 MarketPeace est une application de type MarketPlace développée en **Flutter 3.0** permettant aux utilisateurs de créer des annonces de produits d'occasions.
