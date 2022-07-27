@@ -10,6 +10,8 @@
 
 **Groupe**: Travail réalisé **SEUL**.
 
+**Note obtenue**: 15
+
 MarketPeace est une application de type MarketPlace développée en **Flutter 3.0** permettant aux utilisateurs de créer des annonces de produits d'occasions.
 
 ## Application Back
