@@ -1,9 +1,5 @@
 # MarketPeace App
 
-**Créateur**: Clément GUYON
-
-**Ecole**: Ynov Lyon Campus
-
 **Formation**: Mastère Développement Logiciel, Mobile & IoT
 
 **Module**: Web Service
@@ -16,7 +12,7 @@ MarketPeace est une application de type MarketPlace développée en **Flutter 3.
 
 ## Application Back
 
-L'application Web (API) est disponible sur [ce GitHub](https://github.com/ClementG63/marketpeace_back).
+L'application Web (API) est disponible sur mon GitHub
 
 ## Pré-requis
 
